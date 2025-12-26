@@ -19,6 +19,12 @@ bootRun {
     environment System.getenv()
 }
 
+bootJar {
+    archiveBaseName.set('app')       // new name
+    archiveVersion.set('')           // remove version
+    archiveClassifier.set('')        // optional, usually empty
+}
+
 repositories {
 	mavenCentral()
 }
