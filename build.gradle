@@ -15,14 +15,13 @@ java {
 }
 
 bootRun {
-    // inherit system environment variables
     environment System.getenv()
 }
 
-bootJar {
-    archiveBaseName.set('app')       // new name
-    archiveVersion.set('')           // remove version
-    archiveClassifier.set('')        // optional, usually empty
+build {
+    archiveBaseName.set('app')
+    archiveVersion.set('')
+    archiveClassifier.set('')
 }
 
 repositories {
