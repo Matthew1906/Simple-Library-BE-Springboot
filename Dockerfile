@@ -19,7 +19,7 @@ RUN chmod +x ./gradlew
 # Build the Spring Boot fat JAR
 RUN ./gradlew clean bootJar --no-daemon
 
-RUN ls -R /app
+RUN ls -R .
 
 # Copy the generated JAR to a standard location
 # The JAR path should match your project
