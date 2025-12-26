@@ -52,6 +52,9 @@ public class FilterSpecification<T> {
 
     @SuppressWarnings("unchecked")
     private Specification<T> selectFilter(String field, String[] parts) {
+        if(parts[2].toLowerCase().equals("all")){
+            return Specification.allOf();
+        }
         return (root, query, cb) -> {
              Path<?> path = root.get(field);
              Class<?> type = path.getJavaType();
