@@ -14,6 +14,11 @@ java {
 	}
 }
 
+bootRun {
+    // inherit system environment variables
+    environment System.getenv()
+}
+
 repositories {
 	mavenCentral()
 }

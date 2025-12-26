@@ -1,10 +1,16 @@
 package com.learn.simple_library_be.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +29,10 @@ public class Member {
     
     private String email, phone_no;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("member")
+    private List<Borrowing> borrowings;
+
     protected Member() { }
 
     public Member(String code, String name, String email, String phone_no){
@@ -37,40 +47,24 @@ public class Member {
         return String.format("Member  [id:%s, code:%s, name:%s, email:%s, phone:%s]", this.id, this.code, this.name, this.email, this.phone_no);
     }
 
-    public String getId(){
-        return this.id;
-    }
+    public String getId(){ return this.id; }
 
-    public String getCode(){
-        return this.code;
-    }
+    public String getCode(){ return this.code; }
 
-    public String getName(){
-        return this.name;
-    }
+    public String getName(){ return this.name; }
 
-    public String getEmail(){
-        return this.email;
-    }
+    public String getEmail(){ return this.email; }
 
-    public String getPhone(){
-        return this.phone_no;
-    }
+    public String getPhone(){ return this.phone_no; }
 
-    public void setCode(String code){
-        this.code = code;
-    }
+    public List<Borrowing> getBorrowings(){ return this.borrowings; }
 
-    public void setName(String name){
-        this.name = name;
-    }
+    public void setCode(String code){ this.code = code; }
 
-    public void setEmail(String email){
-        this.email = email;
-    }
+    public void setName(String name){ this.name = name; }
 
-    public void setPhone(String phone){
-        this.phone_no = phone;
-    }
+    public void setEmail(String email){ this.email = email; }
+
+    public void setPhone(String phone){ this.phone_no = phone; }
 
 }

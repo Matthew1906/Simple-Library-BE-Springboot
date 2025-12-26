@@ -3,6 +3,7 @@ package com.learn.simple_library_be.mapping;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.domain.Specification;
@@ -37,8 +38,9 @@ public class FilterSpecification<T> {
             case "string" -> stringFilter(field, parts);
             case "select" -> selectFilter(field, parts);
             case "number" -> numberFilter(field, parts);
-            case "range" -> rangeFilter(field, parts);
+            case "numrange" -> rangeFilter(field, parts);
             case "date" -> dateFilter(field, parts);
+            case "daterange" -> dateFilter(field, parts);
             case "search" -> searchFilter(field, parts);
             default -> null;
         };
@@ -81,7 +83,9 @@ public class FilterSpecification<T> {
         Instant from = Instant.ofEpochMilli(Long.parseLong(parts[2]));
         Instant to = Instant.ofEpochMilli(Long.parseLong(parts[3]));
 
-        return (root, query, cb) -> cb.between(root.get(field), from, to);
+        System.out.println(Date.from(from).toString());
+        System.out.println(Date.from(to).toString());
+        return (root, query, cb) -> cb.between(root.get(field), Date.from(from), Date.from(to));
     }
 
     private Specification<T> searchFilter(String value, String[] parts) {

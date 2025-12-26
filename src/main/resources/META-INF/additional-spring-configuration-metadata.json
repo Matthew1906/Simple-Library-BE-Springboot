@@ -1,0 +1,7 @@
+{"properties": [
+  {
+    "name": "library.max.borrow",
+    "type": "java.lang.Integer",
+    "description": "Maximum books a member can borrow at a time'"
+  }
+]}

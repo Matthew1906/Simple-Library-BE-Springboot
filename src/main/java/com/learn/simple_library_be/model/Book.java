@@ -1,7 +1,11 @@
 package com.learn.simple_library_be.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.learn.simple_library_be.mapping.BookType;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,6 +39,10 @@ public class Book {
 
     @Column(nullable = false)
     private BookType type;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Borrowing> borrowings;
 
     protected Book() { }
 
@@ -61,6 +70,8 @@ public class Book {
     public String getDescription(){ return this.description; }
 
     public BookType getType(){ return this.type; }
+
+    public List<Borrowing> getBorrowings(){ return this.borrowings; }
 
     public void setTitle(String title){ this.title = title; }
 

@@ -26,19 +26,19 @@ public class AuthorService {
         return new Overview<>(authorCount, authors.getContent()); 
     }
 
-    public void createAuthor(Author newAuthor) {
-        if(this.repository.existsByName(newAuthor.getName())){
-            throw new UniqueException("Author", "name", newAuthor.getName());
+    public void createAuthor(Author body) {
+        if(this.repository.existsByName(body.getName())){
+            throw new UniqueException("Author", "name", body.getName());
         }
-        this.repository.save(newAuthor);
+        this.repository.save(body);
     }
 
-    public void updateAuthor(String id, Author updatedAuthor) {
+    public void updateAuthor(String id, Author body) {
         Author author = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Author", id));          
-        if(this.repository.existsByNameAndIdNot(updatedAuthor.getName(), id)){
-            throw new UniqueException("Author", "name", updatedAuthor.getName());
+        if(this.repository.existsByNameAndIdNot(body.getName(), id)){
+            throw new UniqueException("Author", "name", body.getName());
         }
-        author.setName(updatedAuthor.getName());
+        author.setName(body.getName());
         this.repository.save(author);
     }
 

@@ -26,24 +26,24 @@ public class MemberService {
         return new Overview<>(memberCount, members.getContent()); 
     }
 
-    public void createMember(Member newMember) {
-        if(this.repository.existsByCode(newMember.getCode())){
-            throw new UniqueException("Member", "code", newMember.getCode());
+    public void createMember(Member body) {
+        if(this.repository.existsByCode(body.getCode())){
+            throw new UniqueException("Member", "code", body.getCode());
         }
-        this.repository.save(newMember);
+        this.repository.save(body);
     }
 
-    public void updateMember(String id, Member updatedMember) {
+    public void updateMember(String id, Member body) {
         Member member = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Member", id));  
         
-        if(this.repository.existsByCodeAndIdNot(updatedMember.getCode(), id)){
-            throw new UniqueException("Member", "code", updatedMember.getCode());
+        if(this.repository.existsByCodeAndIdNot(body.getCode(), id)){
+            throw new UniqueException("Member", "code", body.getCode());
         }
 
-        member.setCode(updatedMember.getCode());
-        member.setName(updatedMember.getName());
-        member.setEmail(updatedMember.getEmail());
-        member.setPhone(updatedMember.getPhone());
+        member.setCode(body.getCode());
+        member.setName(body.getName());
+        member.setEmail(body.getEmail());
+        member.setPhone(body.getPhone());
         this.repository.save(member);
     }
 

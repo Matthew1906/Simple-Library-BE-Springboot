@@ -68,14 +68,14 @@ public class AuthorController {
     }
 
     @PostMapping(consumes = "multipart/form-data")
-    public Response createAuthor(@ModelAttribute Author newAuthor) {
-        this.service.createAuthor(newAuthor);
+    public Response createAuthor(@ModelAttribute Author body) {
+        this.service.createAuthor(body);
         return new Response(true, 201, "Successfully created a new author");
     }
 
     @PutMapping(value="/{id}", consumes="multipart/form-data")
-    public Response updateAuthor(@PathVariable String id, @ModelAttribute Author updatedAuthor) {
-        this.service.updateAuthor(id, updatedAuthor);
+    public Response updateAuthor(@PathVariable String id, @ModelAttribute Author body) {
+        this.service.updateAuthor(id, body);
         return new Response(true, 200, "Successfully updated author");
     }
 

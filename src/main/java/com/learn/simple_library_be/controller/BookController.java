@@ -68,14 +68,14 @@ public class BookController {
     }
 
     @PostMapping(consumes = "multipart/form-data")
-    public Response createBook(@ModelAttribute BookMutation newBook) {
-        this.service.createBook(newBook);
+    public Response createBook(@ModelAttribute BookMutation body) {
+        this.service.createBook(body);
         return new Response(true, 201, "Successfully created a new title");
     }
 
     @PutMapping(value="/{id}", consumes="multipart/form-data")
-    public Response updateBook(@PathVariable String id, @ModelAttribute BookMutation updatedBook) {
-        this.service.updateBook(id, updatedBook);
+    public Response updateBook(@PathVariable String id, @ModelAttribute BookMutation body) {
+        this.service.updateBook(id, body);
         return new Response(true, 200, "Successfully updated book");
     }
 

@@ -32,29 +32,29 @@ public class BookService {
         return new Overview<>(bookCount, books.getContent());  
     }
 
-    public void createBook(BookMutation newBook) {
-        if(this.repository.existsByTitle(newBook.getTitle())){
-            throw new UniqueException("Book", "title", newBook.getTitle());
+    public void createBook(BookMutation body) {
+        if(this.repository.existsByTitle(body.getTitle())){
+            throw new UniqueException("Book", "title", body.getTitle());
         }
-        Author author = this.authorRepository.findById(newBook.getAuthor()).orElseThrow(() -> new NotFoundException("Author", newBook.getAuthor()));
-        Book book = new Book(newBook.getTitle(), author, newBook.getPublishingYear(), newBook.getDescription(), newBook.getType());
+        Author author = this.authorRepository.findById(body.getAuthor()).orElseThrow(() -> new NotFoundException("Author", body.getAuthor()));
+        Book book = new Book(body.getTitle(), author, body.getPublishingYear(), body.getDescription(), body.getType());
         this.repository.save(book);
     }
 
-    public void updateBook(String id, BookMutation updatedBook) {
+    public void updateBook(String id, BookMutation body) {
         
         Book book = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Book", id));          
         
-        if(this.repository.existsByTitleAndIdNot(updatedBook.getTitle(), id)){
-            throw new UniqueException("Book", "title", updatedBook.getTitle());
+        if(this.repository.existsByTitleAndIdNot(body.getTitle(), id)){
+            throw new UniqueException("Book", "title", body.getTitle());
         }
-         Author author = this.authorRepository.findById(updatedBook.getAuthor()).orElseThrow(() -> new NotFoundException("Author", updatedBook.getAuthor()));
+         Author author = this.authorRepository.findById(body.getAuthor()).orElseThrow(() -> new NotFoundException("Author", body.getAuthor()));
 
-        book.setDescription(updatedBook.getDescription());
+        book.setDescription(body.getDescription());
         book.setAuthor(author);
-        book.setPublishingYear(updatedBook.getPublishingYear());
-        book.setTitle(updatedBook.getTitle());
-        book.setType(updatedBook.getType());
+        book.setPublishingYear(body.getPublishingYear());
+        book.setTitle(body.getTitle());
+        book.setType(body.getType());
 
         this.repository.save(book);
     }
