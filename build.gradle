@@ -18,7 +18,7 @@ bootRun {
     environment System.getenv()
 }
 
-build {
+bootJar {
     archiveBaseName.set('app')
     archiveVersion.set('')
     archiveClassifier.set('')
