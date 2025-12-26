@@ -23,7 +23,7 @@ RUN ls -R .
 
 # Copy the generated JAR to a standard location
 # The JAR path should match your project
-COPY ./build/libs/simple-library-project-be-0.0.1-SNAPSHOT.jar app.jar
+RUN cp build/libs/*.jar app.jar
 
 # Expose default Spring Boot port
 EXPOSE 8080
